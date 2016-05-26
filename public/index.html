@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- ASSIGN ANGULAR MODULE -->
+<html ng-app="commentFeed">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Node/Angular Comment App</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="stylesheets/style.css"><!-- load flexbox css -->
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController">
+    <div class="wrapper">
+            <!-- FORM SECTION -->
+            <div class="write-new">
+                <form>
+                    <input type="text" placeholder="Email" ng-model="formData.email">
+                    <textarea placeholder="Message" name="comment" ng-model="formData.text"></textarea>
+                    <button type="submit" ng-click="createComment()">Submit</button>
+                </form>
+            </div>
+            <!-- COMMENTS SECTION -->
+            <div class="comment-section" >
+                <input type="text" placeholder="Filter" ng-model="search">
+                <!-- loop over comments $scope.comments -->
+                <div class="comment" ng-repeat="comment in comments | filter:search">
+                    <a class="avatar" href="#">
+                        <img gravatar-src="comment.email" gravatar-size="50">
+                    </a>
+                        <div class="info">
+                            <a href="#">{{ comment.email }}</a>
+                            <span>{{ comment.text }}</span>
+                        </div>
+                </div>
+            </div>
+    </div>
+<!-- SCRIPT -->
+<script src="bower_components/angular/angular.js"></script><!-- load angular -->
+<script src="bower_components/angular-gravatar/build/angular-gravatar.min.js"></script><!-- load angular gravatar -->
+<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+<script src="js/services/comments.js"></script> <!-- load our comment service -->
+<script src="js/core.js"></script> <!-- load our main application -->
+
+</body>
+</html>
